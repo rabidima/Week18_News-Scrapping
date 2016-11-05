@@ -3,13 +3,13 @@ $.getJSON('/articles', function(data) {
   // for each one
   for (var i = 0; i<data.length; i++){
     // display the apropos information on the page
-    $('#articles').append('<p data-id="' + data[i]._id + '">'+ data[i].title + '<br />'+ data[i].link + '</p>');
+    $('#articles').append('<h3 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h3><br />'+ '<a href="'+ data[i].link+'">' + data[i].link + '</a>');
   }
 });
 
 
 // whenever someone clicks a p tag
-$(document).on('click', 'p', function(){
+$(document).on('click', '.newsHeader', function(){
   // empty the notes from the note section
   $('#notes').empty();
   // save the id from the p tag
@@ -68,3 +68,30 @@ $(document).on('click', '#savenote', function(){
   $('#titleinput').val("");
   $('#bodyinput').val("");
 });
+
+// delete all database
+
+         $(document).on('click', '#button__delete', function() {
+                  
+                console.log("dataId" + dataId);
+
+                if (confirm("are u sure?")) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/delete',
+                        success: function(response) {
+                            if (response == 'error') {
+                                console.log('Err!');
+                            }
+                            else {
+                                alert('Success');
+                                location.reload();
+                            }
+                        }
+                    });
+                } else {
+                    alert('Canceled!');
+                }
+            });
+     
+
