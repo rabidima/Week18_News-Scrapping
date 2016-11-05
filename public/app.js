@@ -3,19 +3,38 @@ $.getJSON('/articles', function(data) {
   // for each one
   for (var i = 0; i<data.length; i++){
     // display the apropos information on the page
-    $('#articles').append('<a href="'+ data[i].link+'"><h3 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h3></a>');
-    $('#pictures').append('<img src="'+ data[i].image+'">');
+    $('#newsBlock').append('<div class="row"><div class="col-lg-6"><h4 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h4></div><div class="col-lg-6"><img src="'+ data[i].image+'"></div></div><hr>')
+    // $('#articles').append('<a href="'+ data[i].link+'"><h3 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h3></a>');
+    // $('#pictures').append('<img src="'+ data[i].image+'">');
 
   }
 });
 
+$(document).on('click', '#newsScrap', function(){
+  $.getJSON('/articles', function(data) {
+  // for each one
+  $('#newsBlock').empty();
+  for (var i = 0; i<10; i++){
+    // display the apropos information on the page
+
+    $('#newsBlock').append('<div class="row"><div class="col-lg-6"><h4 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h4></div><div class="col-lg-6"><img src="'+ data[i].image+'"></div></div><hr>')
+    // $('#articles').append('<a href="'+ data[i].link+'"><h3 class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</h3></a>');
+    // $('#pictures').append('<img src="'+ data[i].image+'">');
+
+  }
+})
+});
+ 
 
 // whenever someone clicks a p tag
 $(document).on('click', '.newsHeader', function(){
   // empty the notes from the note section
   $('#notes').empty();
+
   // save the id from the p tag
   var thisId = $(this).attr('data-id');
+
+
 
   // now make an ajax call for the Article
   $.ajax({
@@ -25,14 +44,19 @@ $(document).on('click', '.newsHeader', function(){
     // with that done, add the note information to the page
     .done(function( data ) {
       console.log(data);
+
+      $('#description').html('<iframe src="' + data.link + '" style="width:100%; height: 400px;"></iframe>');
+
+
+      $('#notes').append('<img src="' + data.image + '">');
       // the title of the article
-      $('#notes').append('<h2>' + data.title + '</h2>'); 
-      // an input to enter a new title
-      $('#notes').append('<input id="titleinput" name="title" >'); 
+      $('#notes').append('<p>You can comment the article</p>'); 
+      // // an input to enter a new title
+      // $('#notes').append('<input id="titleinput" name="title" >'); 
       // a textarea to add a new note body
-      $('#notes').append('<textarea id="bodyinput" name="body"></textarea>'); 
+      $('#notes').append('<textarea id="bodyinput" name="body"></textarea><br>'); 
       // a button to submit a new note, with the id of the article saved to it
-      $('#notes').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+      $('#notes').append('<button data-id="' + data._id + '" id="savenote">Save Comment</button>');
 
       // if there's a note in the article
       if(data.note){

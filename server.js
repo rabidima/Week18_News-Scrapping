@@ -50,20 +50,15 @@ app.get('/', function(req, res) {
   res.send(index.html);
 });
 
+
 // delete Database
 app.get('/delete', function(req, res) {
  
-  exports.destroy = function(req, res, next) {
-    Article.remove({}, function(err) {
-            if (err) {
-                console.log(err)
-            } else {
-                res.end('success');
-            }
-        }
-    );
-};
+  mongoose.connection.collections['scrapernews'].drop( function(err) {
+    console.log('collection dropped');
+	});
 });
+
 
 // A GET request to scrape the echojs website.
 app.get('/scrape', function(req, res) {
@@ -72,17 +67,37 @@ app.get('/scrape', function(req, res) {
   	// then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // now, we grab every h2 within an article tag, and do the following:
-    $('.posts_small').each(function(i, element) {
+        $('.posts_small').each(function(i, element) {
 
     		// save an empty result object
 				var result = {};
 
 				// add the text and href of every link, 
 				// and save them as properties of the result obj
-				result.title = $(this).find('a .preloader').text();
+				// result.title = $(this).find('h2').text();
+				result.title = $(this).find('img').attr('alt');
 				result.link = $(this).find('a').attr('href');
 				result.image = $(this).find('img').attr('src');
+				
+								// var post = function(){
 
+								//   request('result.link', function(error, response, html) {
+								// 	  	// then, we load that into cheerio and save it to $ for a shorthand selector
+								// 	    var $ = cheerio.load(html);
+								// 	    // now, we grab every h2 within an article tag, and do the following:
+									
+
+								// 		$('.posts post_spacer').each(function(i, element) {
+
+						    		
+								// 		// add the text and href of every link, 
+								// 		// and save them as properties of the result obj
+								// 		// result.title = $(this).find('h2').text();
+								// 		var post = $(this).find('p').text();
+								// 		console.log("post " + post);
+
+
+								// }
 				// using our Article model, create a new entry.
 				// Notice the (result):
 				// This effectively passes the result object to the entry (and the title and link)
@@ -109,6 +124,9 @@ app.get('/scrape', function(req, res) {
 
 // this will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
+
+	// ----------------Sending articles to a page	
+
 	// grab every doc in the Articles array
 	Article.find({}, function(err, doc){
 		// log any errors
