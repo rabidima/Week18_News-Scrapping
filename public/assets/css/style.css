@@ -1,0 +1,83 @@
+#navbar {
+	/*background-color: #3b5998;*/
+}
+
+#main {
+	border: 1px solid #d8dfea;
+	background-color: #e9ebee;
+	max-height: 700px;
+	overflow: auto;
+}
+#leftheader {
+	background-color: #eee9e6;
+}
+#commentsDiv {
+	float: left;
+}
+
+#comments {
+	color: #3b5998;
+	background-color: #e9ebee; 
+	padding-left: 15px;
+}
+
+#bodyDiv {
+	border: 1px lightgrey solid;
+	max-height: 700px;
+}
+
+.headers {
+	padding: 15px 0 0 5px;
+	color: #1565c0;
+	height: 170px;
+	overflow: hide;
+	border: 1px solid #d8dfea;
+}
+
+#description {
+	text-align: center;
+}
+
+
+#input {
+	text-align: center;
+}
+#footer {
+	margin: 5px 0 10px 0;
+	padding-top: 5px;
+	color: white;
+	background-color: #3b5998; 
+}
+.small {
+	float: left;
+	margin: 10px 3px 0 0;
+	max-width: 100px;
+}
+
+#rightheader {
+	position: static;
+	text-align: center;
+	color: white;
+	background-color: #3b5998; 
+}
+
+h3 {
+	color: #353535;
+}
+.newsBlock {
+	background-color:lightgray;
+}
+
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { ... }

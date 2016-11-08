@@ -6,60 +6,66 @@
 
 	<title>Week18 | News Scraper</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 	<div class="container">
-
+    <div class="row">
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button> -->
-            <a class="navbar-brand" href="#">My News Scraper</a>
+            <a class="navbar-brand" href="#">DiMaS</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a id="newsScrap" href="#">Comedian News</a></li>
+              <li class="active"><a id="newsScrap" href="#">Tech News</a></li>
               <li><a href="#">Watch Comedy</a></li>
-              <li><a href="#">Seleberties</a></li>
-             
+              <li><a href="#">Celeberties</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
-              <!-- <li class="active"><a href="./">Curent Directory <span class="sr-only">(current)</span></a></li> -->
-              <li><a href="#">Log In</a></li>
+               <li><a href="#">Log In</a></li>
+               <li><button type="button" class="btn btn-danger">SCRAP</button></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
+    </div>
 
-
-	 <!--  <div class="container-fluid">
-         <h1 class="text-center"><strong>Best News Scraper</strong></h1> 
-    	   	<img src="img/news.jpg">
-      		<p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button">
-          <span class="glyphicon glyphicon-envelope"></span> Learn more</a></p>
-	  </div> -->
-	  <div class="row">	
-	  		<div class="col-lg-6">
-	  		    	<div id="newsBlock"></div>
-        </div> 
-            
-	  		<div class="col-lg-6">
-	  			 <div id="description"></div>
-             <div id="notes"></div>
+	  <div class="row" id="bodyDiv">       
+	  		<div id="commentsDiv" class="col-sm-7">
+	  			<div id="leftheader" class="row"></div>
+            <div id="description"></div>
+              <div id="comments"></div>
+               <div id="input"></div>
+         
         </div>
-	  		
-	  </div>
+        <div id="main" class="col-sm-5">
+          <div id="rightheader" class="row">
+              <h2>Tech News</h2>
+          </div>
+       
+              <div id="newsBlock" class="row">
+                
+              </div>
+        </div> 
+    </div>    
+	  		 <!--  <div class="container-fluid">
+         <h1 class="text-center"><strong>Best News Scraper</strong></h1> 
+          <img src="img/news.jpg">
+          <p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button">
+          <span class="glyphicon glyphicon-envelope"></span> Learn more</a></p>
+    </div> -->
+    <div id="footer" class="container-fluid"> 
+      <div class="row text-center"><p>News Scraped from www.ComputerWorld.com</p>
+      </div>
+	</div>
 	
-
- <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-  <script src="app.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+   <script src="app.js"></script>
+    </div>
 </body>
 </html>
