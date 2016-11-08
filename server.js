@@ -1,5 +1,6 @@
 
 
+
 // dependencies
 var express = require('express');
 var app = express();
@@ -38,12 +39,14 @@ db.once('open', function() {
 var Comment = require('./models/Comment.js');
 var Article = require('./models/Article.js');
 
-// var url = "http://www.indeed.com/q-Junior-Full-Stack-Developer-l-Los-Angeles,-CA-jobs.html";
 var url = "http://www.computerworld.com/news/";
-// var url = "http://www.laughspin.com/";
 
 // Routes
 // ======
+
+app.get('/www.computerworld.com/news/',function(req,res){
+	res.redirect(url);
+});
 
 // Simple index route
 app.get('/', function(req, res) {
@@ -59,34 +62,45 @@ app.get('/scrape', function(req, res) {
     // grab every class='.post_small'
         $('.river-well').each(function(i, element) {
 
-    		// save an empty result object
-				var result = {};
+			// save an empty result object
+			var result = {};
 
-				// add the text and href of every link, 
-				// and save them as properties of the result obj
-				result.title = $(this).find('a').text();
-				result.link = $(this).find('a').attr('href');
-				result.content = $(this).find('h4').text();	
-				result.image = $(this).find('img').attr('data-original');
+			// add the text and href of every link, 
+			// and save them as properties of the result obj
+			result.title = $(this).find('a').text();
+			result.link = $(this).find('a').attr('href');
+			result.content = $(this).find('h4').text();	
+			result.image = $(this).find('img').attr('data-original');
 
-				// create a new entry using Article model
-				//passes the result object to the entry (and the title and link)
-				var entry = new Article (result);
+			// check if Article exist in Database
+			Article.findOne({ title: {$regex : result.title }}).exec(function(err, doc){
+				// log any errors
+				if (err){
+					console.log("Err" + err);
+				} 
+				else {
+					console.log("Found Exicting entry :" + result.title);
+					if (doc === null){
+						// create a new entry using Article model
+						//passes the result object to the entry
+						var entry = new Article (result);
 
-				//save that entry to the db
-				entry.save(function(err, doc) {
-					// log any errors
-				  if (err) {
-				    console.log(err);
-				  } 
-				  // or log the doc
-				  else {
-				    console.log(doc);
-				  }
-				});
-
-
-    });
+						//save that entry to the db
+						entry.save(function(err, doc) {
+							// log any errors
+						  if (err) {
+						    console.log(err);
+						  } 
+						  // or log the doc
+						  else {
+						    console.log(doc);
+						  }
+						});
+					}
+				}
+			});
+		
+    	});
   });
   res.send("Scrape Complete");
 });

@@ -4,11 +4,27 @@ $.getJSON('/articles', function(data) {
   for (var i = 0; i<data.length; i++){
     // display the apropos information on the page
     $('#newsBlock').append('<div class="headers col-sm-6"><img class="img-thumbnail small" src="'+ data[i].image+'"><p class="newsHeader" data-id="' + data[i]._id + '">'+ data[i].title + '</p></div>')
-   
   }
+  // $('#description').append('<h2 class="fresh">Fresh Article</h2>');
+  $('#description').append('<h2>' + data[0].title + '</h2><hr>' + '<img src="' + data[0].image + '"</img><h3>' + data[0].content + '</h3>');
+   
+   // if there is a comment
+  if(data[0].comment){
+
+     $('#comments').append('<h5>Comment:  ' + data[0].comment.body + '</h5><p>' + 'Date:  ' + data[0].comment.time + '</p>'); 
+   
+     }
+
+  $('#input').append('<hr><p>You can comment this article</p>');
+  // a textarea to add a new comment body
+  $('#input').append('<textarea style="width:50%" id="bodyinput" name="body"></textarea><br>'); 
+  // a button to submit a new comment, with the id of the article saved to it
+  $('#input').append('<button class="btn btn-primary" data-id="' + data[0]._id + '" id="savecomment">Save Comment</button>');
+     
+
 });
     
- 
+
 // clicks a newsHeader
 $(document).on('click', '.newsHeader', function(){
   
@@ -72,6 +88,13 @@ $(document).on('click', '#savecomment', function(){
   // remove the values entered in the text area
   $('#bodyinput').val("");
 });
+
+
+$('#scrapeBtn').click(function(){
+  $.getJSON('/scrape', function(data){
+    location.reload();
+  })
+})
 
 // delete all database
 

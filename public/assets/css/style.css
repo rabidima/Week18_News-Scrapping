@@ -29,13 +29,14 @@
 .headers {
 	padding: 15px 0 0 5px;
 	color: #1565c0;
-	height: 170px;
-	overflow: hide;
+	height: 120px;
+	overflow: hidden;
 	border: 1px solid #d8dfea;
 }
 
 #description {
 	text-align: center;
+	/*background-color: #e9ebee;*/
 }
 
 
@@ -43,7 +44,7 @@
 	text-align: center;
 }
 #footer {
-	margin: 5px 0 10px 0;
+	/*margin: 0px 0 10px 0;*/
 	padding-top: 5px;
 	color: white;
 	background-color: #3b5998; 
@@ -55,19 +56,33 @@
 }
 
 #rightheader {
-	position: static;
+	
 	text-align: center;
 	color: white;
 	background-color: #3b5998; 
 }
+#rightheader>h2 {
 
+	margin: 5px 0 5px 0;
+}
+.fresh {
+	padding: 5px;
+	background-color: red;
+	color: white;
+}
 h3 {
 	color: #353535;
 }
 .newsBlock {
 	background-color:lightgray;
+	max-height: 600px;
 }
-
+.headers>p:hover {
+	color: red;
+}
+#scrapeBtn {
+	margin-top: 7px;
+}
 
 
 /* Extra small devices (phones, less than 768px) */
