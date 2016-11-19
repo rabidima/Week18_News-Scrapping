@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({
 
 // make public a static dir
 app.use(express.static('public'));
+var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
 
 
 // Database configuration with mongoose
@@ -189,6 +190,6 @@ app.post('/articles/:id', function(req, res){
 
 
 // listen on port 3000
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log('App running on port 3000!');
 });
