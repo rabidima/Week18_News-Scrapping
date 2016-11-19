@@ -21,7 +21,7 @@ app.use(express.static('public'));
 
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/computerworld3');
+mongoose.connect('mongodb://heroku_dkrsmh6j:d9uk5v8ofojpa2dmiqa4srb4vn@ds147777.mlab.com:47777/heroku_dkrsmh6j');
 var db = mongoose.connection;
 
 // show any mongoose errors
